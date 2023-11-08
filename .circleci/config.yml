@@ -1,9 +1,38 @@
 # CircleCI configuration file
 version: 2.1
 
+parameters:
+  GHA_Event:
+    type: string
+    default: ""
+  GHA_Actor:
+    type: string
+    default: ""
+  GHA_Action:
+    type: string
+    default: ""
+  GHA_Meta:
+    type: string
+    default: ""
+
 jobs:
   build:
     docker:
-     - image: cimg/base:2022.05
+      - image: cimg/base:2022.05
     steps:
-        - run: echo "Say hello to YAML!"
+      - run: echo "Say hello to YAML!"
+
+  after-branch-deletion:
+    docker:
+      - image: cimg/base:2022.05
+    steps:
+      - run: echo "YAEH the branch has been deleted!"
+
+workflows:
+  clean-up:
+    when:
+      and:
+        - equal: [ "delete", << pipeline.parameters.GHA_Event >>]
+        - << pipeline.parameters.GHA_Action >>
+    jobs:
+      - after-branch-deletion
