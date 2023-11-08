@@ -7,7 +7,7 @@ on:
 
 jobs:
   trigger-circleci:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     steps:
       - name: githubwebhooks_test
         id: cb4b5e56-6e37-4da4-a9a5-f238088ebb52
