@@ -15,4 +15,4 @@ jobs:
         with:
           node-version: '18.x'
         env:
-          CCI_TOKEN: ${{secrets.CIRCLECI_TOKEN}}
+          CCI_TOKEN: ${{ secrets.CIRCLECI_TOKEN2 }}
