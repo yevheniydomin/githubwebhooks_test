@@ -11,6 +11,6 @@ jobs:
     steps:
       - name: githubwebhooks_test
         id: cb4b5e56-6e37-4da4-a9a5-f238088ebb52
-        uses: circleci/trigger_circleci_pipeline@v1.0
+        uses: CircleCI-Public/trigger-circleci-pipeline-action@v1.0.5
         env:
           CCI_TOKEN: ${{secrets.CIRCLECI_TOKEN}}
