@@ -3,8 +3,7 @@ name: Branch Deletion
 on:
   delete:
     branches:
-      filter:
-        - main
+      - '*'
 
 jobs:
   trigger-circleci:
