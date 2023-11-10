@@ -28,6 +28,7 @@ jobs:
     steps:
       - run: echo "YAEH the branch has been deleted!"
       - run: echo "Deleted branch ${CIRCLECI_BRANCH}"
+      - run: echo << pipeline.parameters.GHA_Meta >>
 
 workflows:
   clean-up:
