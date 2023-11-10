@@ -43,3 +43,7 @@ workflows:
         - << pipeline.parameters.GHA_Action >>
     jobs:
       - after-branch-deletion
+
+  should-not-be-triggered:
+    jobs:
+      - build
