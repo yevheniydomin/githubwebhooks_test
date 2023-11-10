@@ -21,13 +21,13 @@ jobs:
       - image: cimg/base:2022.05
     steps:
       - run: echo "Say hello to YAML!"
-      - run: echo "Deleted branch ${CIRCLECI_BRANCH}"
 
   after-branch-deletion:
     docker:
       - image: cimg/base:2022.05
     steps:
       - run: echo "YAEH the branch has been deleted!"
+      - run: echo "Deleted branch ${CIRCLECI_BRANCH}"
 
 workflows:
   clean-up:
