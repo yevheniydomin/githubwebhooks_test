@@ -45,5 +45,9 @@ workflows:
       - after-branch-deletion
 
   should-not-be-triggered:
+    when:
+      and:
+        - not << pipeline.parameters.GHA_Event >>
+        - not << pipeline.parameters.GHA_Action >>
     jobs:
       - build
