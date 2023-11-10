@@ -30,7 +30,8 @@ jobs:
       - run:
           name: Process GitHub Webhook
           command: |
-            # Parse the payload and extract the deleted branch name
+            echo "Webhook Payload:"
+            echo "$CIRCLE_PAYLOAD"
             DELETED_BRANCH_NAME=$(echo "$CIRCLE_PAYLOAD" | jq -r '.ref | ltrimstr("refs/heads/")')
             echo "Deleted branch name: $DELETED_BRANCH_NAME"
 
