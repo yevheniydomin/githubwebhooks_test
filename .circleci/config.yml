@@ -2,18 +2,9 @@
 version: 2.1
 
 parameters:
-  GHA_Event:
-    type: string
-    default: ""
-  GHA_Actor:
-    type: string
-    default: ""
-  GHA_Action:
-    type: string
-    default: ""
-  GHA_Meta:
-    type: string
-    default: ""
+      BRANCH_NAME: 
+        type: string
+        default: ""
 
 jobs:
   build:
@@ -25,22 +16,20 @@ jobs:
   after-branch-deletion:
     docker:
       - image: cimg/base:2022.05
+    parameters:
+      BRANCH_NAME:
+        type: string
+        default: ""
     steps:
       - run: echo "YAEH the branch has been deleted!"
       - run:
-          name: Process GitHub Webhook
+          name: Clean up resources
           command: |
-            echo "Webhook Payload:"
-            echo "$CIRCLE_PAYLOAD"
-            DELETED_BRANCH_NAME=$(echo "$CIRCLE_PAYLOAD" | jq -r '.ref | ltrimstr("refs/heads/")')
-            echo "Deleted branch name: $DELETED_BRANCH_NAME"
+            DELETED_BRANCH_NAME=$BRANCH_NAME
+            echo "Cleaning up resources for branch: $DELETED_BRANCH_NAME"
 
 workflows:
   clean-up:
-    when:
-      and:
-        - equal: [ "delete", << pipeline.parameters.GHA_Event >>]
-        - << pipeline.parameters.GHA_Action >>
     jobs:
       - after-branch-deletion
 

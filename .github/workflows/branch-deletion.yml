@@ -1,4 +1,4 @@
-name: Branch Deletion
+name: Branch Cleanup
 
 on:
   delete:
@@ -6,13 +6,22 @@ on:
       - '*'
 
 jobs:
-  trigger-circleci:
+  cleanup:
     runs-on: ubuntu-latest
+
     steps:
-      - name: githubwebhooks_test
-        id: cb4b5e56-6e37-4da4-a9a5-f238088ebb52
-        uses: CircleCI-Public/trigger-circleci-pipeline-action@v1.0.5
-        with:
-          node-version: '18.x'
+      - name: Trigger CircleCI Cleanup Job
         env:
-          CCI_TOKEN: ${{ secrets.CIRCLECI_TOKEN2 }}
+          CIRCLECI_API_TOKEN: ${{ secrets.CIRCLECI_TOKEN_2 }}
+        run: |
+          if [[ $GITHUB_EVENT_NAME == 'delete' && $GITHUB_REF_TYPE == 'branch' ]]; then
+            DELETED_BRANCH_NAME=${GITHUB_REF#refs/heads/}
+            echo "Branch deletion event detected. Triggering CircleCI job for branch: $DELETED_BRANCH_NAME"
+            curl -X POST -u $CIRCLECI_API_TOKEN: \
+              -d 'branch=main' \ # Replace 'main' with your default branch
+              -d "parameters[BRANCH_NAME]=$DELETED_BRANCH_NAME" \
+              https://circleci.com/api/v2/project/github/yevheniydomin/githubwebhooks_test/pipeline
+          else
+            echo "No branch deletion event detected. Skipping CircleCI job trigger."
+          fi
+
