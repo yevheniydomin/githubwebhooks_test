@@ -16,9 +16,9 @@ jobs:
         run: |
           DELETED_BRANCH_NAME=${GITHUB_REF#refs/heads/}
           echo "Branch deletion event detected. Triggering CircleCI job for branch: $DELETED_BRANCH_NAME"
-          curl --location 'https://circleci.com/api/v2/project/gh/yevheniydomin/githubwebhooks_test/pipeline'
-          --header $CIRCLECI_API_TOKEN
-          --header 'Content-Type: text/plain'
+          curl --location 'https://circleci.com/api/v2/project/gh/yevheniydomin/githubwebhooks_test/pipeline' \
+          --header $CIRCLECI_API_TOKEN \
+          --header 'Content-Type: text/plain' \
           -d 'parameters [BRANCH_NAME="$DELETED_BRANCH_NAME"]'
 
 
