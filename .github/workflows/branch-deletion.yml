@@ -18,6 +18,6 @@ jobs:
           echo "Branch deletion event detected. Triggering CircleCI job for branch: $DELETED_BRANCH_NAME"
           curl -X POST -u $CIRCLECI_API_TOKEN: \
             -d "parameters[BRANCH_NAME]=$DELETED_BRANCH_NAME" \
-            https://circleci.com/api/v2/project/github/yevheniydomin/githubwebhooks_test/pipeline
+            https://circleci.com/api/v2/project/gh/yevheniydomin/githubwebhooks_test/pipeline
 
 
