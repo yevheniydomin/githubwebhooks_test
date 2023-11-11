@@ -32,10 +32,3 @@ workflows:
   clean-up:
     jobs:
       - after-branch-deletion
-
-  should-not-be-triggered:
-    when:
-      and:
-        - not [ "delete", << pipeline.parameters.GHA_Event >>]
-    jobs:
-      - build
