@@ -14,14 +14,10 @@ jobs:
         env:
           CIRCLECI_API_TOKEN: ${{ secrets.CIRCLECI_TOKEN_2 }}
         run: |
-          if [[ $GITHUB_EVENT_NAME == 'delete' && $GITHUB_REF_TYPE == 'branch' ]]; then
-            DELETED_BRANCH_NAME=${GITHUB_REF#refs/heads/}
-            echo "Branch deletion event detected. Triggering CircleCI job for branch: $DELETED_BRANCH_NAME"
-            curl -X POST -u $CIRCLECI_API_TOKEN: \
-              -d 'branch=main' \ # Replace 'main' with your default branch
-              -d "parameters[BRANCH_NAME]=$DELETED_BRANCH_NAME" \
-              https://circleci.com/api/v2/project/github/yevheniydomin/githubwebhooks_test/pipeline
-          else
-            echo "No branch deletion event detected. Skipping CircleCI job trigger."
-          fi
+          DELETED_BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          echo "Branch deletion event detected. Triggering CircleCI job for branch: $DELETED_BRANCH_NAME"
+          curl -X POST -u $CIRCLECI_API_TOKEN: \
+            -d "parameters[BRANCH_NAME]=$DELETED_BRANCH_NAME" \
+            https://circleci.com/api/v2/project/github/yevheniydomin/githubwebhooks_test/pipeline
+
 
