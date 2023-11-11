@@ -12,12 +12,13 @@ jobs:
     steps:
       - name: Trigger CircleCI Cleanup Job
         env:
-          CIRCLECI_API_TOKEN: ${{ secrets.CIRCLECI_TOKEN }}
+          CIRCLECI_API_TOKEN: ${{ secrets.CIRCLECI_PRIVATE }}
         run: |
           DELETED_BRANCH_NAME=${GITHUB_REF#refs/heads/}
           echo "Branch deletion event detected. Triggering CircleCI job for branch: $DELETED_BRANCH_NAME"
           curl -X POST -u $CIRCLECI_API_TOKEN: \
             -d "parameters[BRANCH_NAME]=$DELETED_BRANCH_NAME" \
+            -H 'Circle-Token: ${CIRCLECI_API_TOKEN}'
             https://circleci.com/api/v2/project/gh/yevheniydomin/githubwebhooks_test/pipeline
 
 
