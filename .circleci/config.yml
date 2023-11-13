@@ -21,9 +21,9 @@ jobs:
         type: string
         default: ""
     steps:
-      - run: echo "YAEH the branch has been deleted!"
+      - run: echo "YAEH the branch has been deletedsss"
       - run:
-          name: Clean up resources
+          name: Clean up resources -
           command: |
             DELETED_BRANCH_NAME=$BRANCH_NAME
             echo "Cleaning up resources for branch: $DELETED_BRANCH_NAME"
