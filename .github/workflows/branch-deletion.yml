@@ -12,6 +12,7 @@ jobs:
       - name: trigger circleci
         env:
           CIRCLECI_API_TOKEN: ${{ secrets.CIRCLECI_PRIVATE }}
+          BRANCH_NAME: ${GITHUB_REF#refs/heads/}
         run: |
           BRANCH_NAME=${GITHUB_REF#refs/heads/}
           echo "Branch deletion event detected. Triggering CircleCI job for branch: $DELETED_BRANCH_NAME"
@@ -19,5 +20,3 @@ jobs:
           --header "Circle-Token: $CIRCLECI_API_TOKEN" \
           --header "content-type: application/json" \
           --data '{"branch": "main", "BRANCH_NAME":"${GITHUB_REF#refs/heads/}"}'
-        env:
-          BRANCH_NAME: ${GITHUB_REF#refs/heads/}
