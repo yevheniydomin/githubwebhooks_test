@@ -9,18 +9,13 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: Trigger CircleCI Cleanup Job
-        uses: actions/checkout@v2
-        with:
-          env: BRANCH_NAME=${GITHUB_REF#refs/heads/}
+      - name: trigger circleci
         env:
           CIRCLECI_API_TOKEN: ${{ secrets.CIRCLECI_PRIVATE }}
         run: |
-          DELETED_BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          BRANCH_NAME=${GITHUB_REF#refs/heads/}
           echo "Branch deletion event detected. Triggering CircleCI job for branch: $DELETED_BRANCH_NAME"
-          curl --location 'https://circleci.com/api/v2/project/gh/yevheniydomin/githubwebhooks_test/pipeline' \
-          --header 'Circle-Token: CCIPAT_88STvS9VTBEXwXYvxS8tcj_a27ae6c68ea1222fc8aa2c70d0b39deb40ab7b46' \
-          --header 'Content-Type: text/plain' \
-          -d 'parameters [BRANCH_NAME="$DELETED_BRANCH_NAME"]'
+          curl -X POST 'https://circleci.com/api/v2/project/gh/yevheniydomin/githubwebhooks_test/pipeline' \
+          --header "Circle-Token: CCIPAT_88STvS9VTBEXwXYvxS8tcj_a27ae6c68ea1222fc8aa2c70d0b39deb40ab7b46" \
+          --header "Content-Type: application/json" \
+          --data "{"branch":"${GITHUB_REF#refs/heads/}"}'

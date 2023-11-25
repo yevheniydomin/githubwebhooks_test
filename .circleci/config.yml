@@ -30,7 +30,5 @@ jobs:
 
 workflows:
   clean-up:
-    when: << pipeline.parameters.BRANCH_NAME >>
     jobs:
       - after-branch-deletion
-    env: BRANCH_NAME=<< pipeline.parameters.BRANCH_NAME >>
