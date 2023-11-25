@@ -2,9 +2,9 @@
 version: 2.1
 
 parameters:
-      BRANCH_NAME: 
-        type: string
-        default: ""
+  BRANCH_NAME:
+    type: string
+    default: ''
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
     parameters:
       BRANCH_NAME:
         type: string
-        default: ""
+        default: ''
     steps:
       - run: echo "YAEH the branch has been deletedsss"
       - run:
@@ -30,5 +30,7 @@ jobs:
 
 workflows:
   clean-up:
+    when: << pipeline.parameters.BRANCH_NAME >>
     jobs:
       - after-branch-deletion
+    env: BRANCH_NAME=<< pipeline.parameters.BRANCH_NAME >>
