@@ -17,5 +17,5 @@ jobs:
           echo "Branch deletion event detected. Triggering CircleCI job for branch: $DELETED_BRANCH_NAME"
           curl -X POST 'https://circleci.com/api/v2/project/gh/yevheniydomin/githubwebhooks_test/pipeline' \
           --header "Circle-Token: CCIPAT_88STvS9VTBEXwXYvxS8tcj_a27ae6c68ea1222fc8aa2c70d0b39deb40ab7b46" \
-          --header "Content-Type: application/json" \
+          --header "content-type: application/json" \
           --data "{"branch":"${GITHUB_REF#refs/heads/}"}'
