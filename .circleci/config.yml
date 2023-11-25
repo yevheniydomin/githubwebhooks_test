@@ -25,8 +25,7 @@ jobs:
       - run:
           name: Clean up resources -
           command: |
-            DELETED_BRANCH_NAME= << parameters.BRANCH_NAME >>
-            echo "Cleaning up resources for branch: $DELETED_BRANCH_NAME"
+            echo "Cleaning up resources for branch: $BRANCH_NAME"
 
 workflows:
   clean-up:
