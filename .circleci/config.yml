@@ -21,5 +21,4 @@ workflows:
   clean-up:
     jobs:
       - after-branch-deletion
-      env:
-        - BRANCH_NAME: << parameters.branch_name >>
+        BRANCH_NAME: << parameters.branch_name >>
