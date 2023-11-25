@@ -2,24 +2,18 @@
 version: 2.1
 
 parameters:
-  BRANCH_NAME2:
+  branch_name:
     type: string
-    default: ''
+    default: 'EMPTY'
 
 jobs:
-  build:
-    docker:
-      - image: cimg/base:2022.05
-    steps:
-      - run: echo "Say hello to YAML!"
-
   after-branch-deletion:
     docker:
       - image: cimg/base:2022.05
     steps:
       - run: echo "YAEH the branch has been deleted"
       - run:
-          name: Clean up resources -
+          name: Clean up resources
           command: |
             echo "Cleaning up resources for branch: $BRANCH_NAME"
 
@@ -27,3 +21,5 @@ workflows:
   clean-up:
     jobs:
       - after-branch-deletion
+      env:
+        - BRANCH_NAME: << parameters.branch_name >>
