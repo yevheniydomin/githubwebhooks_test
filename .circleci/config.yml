@@ -21,11 +21,11 @@ jobs:
         type: string
         default: << pipeline.parameters.BRANCH_NAME >>
     steps:
-      - run: echo "YAEH the branch has been deletedsss"
+      - run: echo "YAEH the branch has been deleted"
       - run:
           name: Clean up resources -
           command: |
-            DELETED_BRANCH_NAME=$BRANCH_NAME
+            DELETED_BRANCH_NAME= << parameters.BRANCH_NAME >>
             echo "Cleaning up resources for branch: $DELETED_BRANCH_NAME"
 
 workflows:
