@@ -19,7 +19,7 @@ jobs:
     parameters:
       BRANCH_NAME:
         type: string
-        default: ''
+        default: << pipeline.parameters.BRANCH_NAME >>
     steps:
       - run: echo "YAEH the branch has been deletedsss"
       - run:
@@ -32,5 +32,3 @@ workflows:
   clean-up:
     jobs:
       - after-branch-deletion
-        parameters:
-          BRANCH_NAME: $BRANCH_NAME
