@@ -18,7 +18,7 @@ jobs:
           curl -X POST 'https://circleci.com/api/v2/project/circleci/suSXZJLC1zVuJQxrgoqZm/cb4b5e56-6e37-4da4-a9a5-f238088ebb52' \
           --header "Circle-Token: $CIRCLECI_API_TOKEN" \
           --header "Content-Type: application/json" \
-          --data "{\"branch\": \"$BRANCH_NAME\", \"parameters\": {\"branch_name\":\"$BRANCH_NAME\"}}"
+          --data "{\"branch\": \"ser\", \"parameters\": {\"branch_name\":\"$BRANCH_NAME\"}}"
 
 # BRANCH_NAME=${{ github.event.ref }}
 #           echo "Branch deletion event detected. Triggering CircleCI job for branch: ${BRANCH_NAME}"
