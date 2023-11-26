@@ -15,10 +15,11 @@ jobs:
       - run:
           name: Clean up resources
           command: |
-            echo "Cleaning up resources for branch: $BRANCH_NAME"
+            echo "Cleaning up resources for branch: ${branch}"
+          env:
+            - branch: << pipline.parameters.branch_name >>
 
 workflows:
   clean-up:
     jobs:
       - after-branch-deletion
-        BRANCH_NAME: << parameters.branch_name >>
