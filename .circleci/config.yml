@@ -15,9 +15,9 @@ jobs:
       - run:
           name: Clean up resources
           command: |
-            echo "Cleaning up resources for branch: ${branch}"
-          env:
-            - branch: << pipline.parameters.branch_name >>
+            echo "Cleaning up resources for branch: ${BRANCH}"
+    environment:
+      - BRANCH: << pipeline.parameters.branch_name >>
 
 workflows:
   clean-up:
